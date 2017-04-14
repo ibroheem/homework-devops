@@ -1,0 +1,11 @@
+git init
+git remote add origin -m master https://github.com/seboagwu/homework-devops
+git remote -v
+git pull origin master
+git add hex.h
+git add main.cpp
+git add txnlog.dat
+git add proto-compile-run-with-g__-6.png
+git add COMMENTS
+git add README.md
+git commit -m "Added Proto files"
