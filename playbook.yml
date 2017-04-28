@@ -15,6 +15,9 @@
 
     - name: Installing unzip
       apt: pkg=unzip state=installed update_cache=true
+
+    - name: Installing curl
+      apt: pkg=curl state=installed update_cache=true
       
     - name: Create NGINX SSL folder
       file: path=/etc/nginx/ssl state=directory owner=www-data group=www-data mode=0775 recurse=yes 
