@@ -1,5 +1,5 @@
 git init
-git remote add origin -m master https://github.com/seboagwu/homework-devops
+git remote add origin -m master https://github.com/ibroheem/homework-devops
 git remote -v
 git pull origin master
 git add hex.h
