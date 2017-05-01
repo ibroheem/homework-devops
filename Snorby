@@ -1,0 +1,70 @@
+
+# vi /etc/apt/sources.list 
+
+Add the following lines: 
+
+deb http://packages.dotdeb.org squeeze all 
+deb-src http://packages.dotdeb.org squeeze all 
+
+Install the dotdeb GnuPG key: 
+
+# cd /usr/src && wget http://www.dotdeb.org/dotdeb.gpg 
+# cat dotdeb.gpg | apt-key add - 
+
+# apt-get update && apt-get install build-essential curl default-jre g++ 
+gcc git git-core imagemagick libmagickwand-dev libmysqlclient-dev 
+libreadline5-dev libsqlite3-dev libssl-dev libxml2-dev libxslt1-dev 
+libxslt1-dev libyaml-dev make mysql-server vim wkhtmltopdf zlib1g-dev 
+zlib1g-dev 
+
+# cd /usr/src && wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p125.tar.gz 
+# tar -zxf ruby-1.9.3-p125.tar.gz && cd ruby-1.9.3-p125 
+# ./configure && make && make install 
+# gem install bundler 
+
+# git clone http://github.com/Snorby/snorby.git /var/www/snorby && cd /var/www/snorby
+# bundle install 
+ # cp config/snorby_config.example.yml config/snorby_config.yml && nano config/snorby_config.yml OR
+# cp config/snorby_config.yml.example config/snorby_config.yml && nano config/snorby_config.yml 
+
+Lines 3, 18 & 30 - change wkhtmltopdf path to /usr/bin/wkhtmltopdf 
+# cp config/database.yml.example config/database.yml && nano config/database.yml
+
+Line 9 - change db root password 
+# bundle exec rake snorby:setup RAILS_ENV=production 
+# rails server -e production 
+
+Go to http://servername:3000 
+	- login with snorby@snorby.org:snorby OR
+	- snorby@example.com:snorby 
+
+USERNAME & PASSWORD ISSUES
+1. Mostly Database named snorby is NOT created. (MySQL)
+	- create the db or Faster a user: snorby with db of its name
+	- $ sudo bundle exec rake snorby:setup RAILS_ENV=production 
+
+2. 	Launch Rails Console
+Note: your method of launching rails console in production may be significantly different.
+/usr/local/www/snorby/$> script/rails c
+-or-
+Modern Bundle execution wrapper of rails gem bin
+/usr/local/www/snorby/$>  sudo -u www RAILS_ENV="production" bundle exec script/rails c
+Using Rail's Console to reset user's password.
+u = User.find_by_email("snorby@example.com")
+u.password="password1234"
+u.password_confirmation="password1234"
+u.save
+
+Snorby not displaying alerts
+	Solution
+		Using
+			exex barnyard2 -c /etc/snort/barnyard2.conf -d /var/log/snort -f snort.u2 -w /var/log/snort/barnyard2.waldo -g snort -u snort
+		In service, systemd, CLUI ...
+
+	1.1 -	Put below (or similar) in /etc/snort/barnyard2.conf
+ 	output database: log, mysql, user=snorby password=snorby dbname=snorby host=localhost sensor name=sensor01
+		details of the db u want to barnyard to log to.
+
+Reasons
+ 	Using an inKorrect/incomplet command can cause barnyard2 NOT to log.
+	Not specifying correct DB details.
