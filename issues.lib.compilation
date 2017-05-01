@@ -1,0 +1,6 @@
+ 1. undefined macro: AC_PROG_LIBTOOL #9
+  Sol:
+    Install libtool, pkg-config to fix this
+    
+    https://github.com/maxmind/libmaxminddb/issues/9
+    http://stackoverflow.com/questions/8811381/possibly-undefined-macro-ac-msg-error
